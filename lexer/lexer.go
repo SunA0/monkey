@@ -2,22 +2,22 @@ package lexer
 
 import "monkey/token"
 
-type lexer struct {
+type Lexer struct {
 	input        string
 	position     int  // 当前字符串的位置
 	readPosition int  // 当前字符串的位置的下一个位置，读取位置
 	ch           byte // 当前字符
 }
 
-func NewLexer(input string) *lexer {
-	l := &lexer{input: input}
+func NewLexer(input string) *Lexer {
+	l := &Lexer{input: input}
 	l.readChar()
 	return l
 }
 
 // readChar
 // 读取input中下一个字符
-func (l *lexer) readChar() {
+func (l *Lexer) readChar() {
 	if l.readPosition >= len(l.input) {
 		l.ch = 0
 	} else {
@@ -27,7 +27,7 @@ func (l *lexer) readChar() {
 	l.readPosition += 1
 }
 
-func (l *lexer) readIdentifier() string {
+func (l *Lexer) readIdentifier() string {
 	position := l.position
 	for isLetter(l.ch) {
 		l.readChar()
@@ -35,7 +35,7 @@ func (l *lexer) readIdentifier() string {
 	return l.input[position:l.position]
 }
 
-func (l *lexer) readNumber() string {
+func (l *Lexer) readNumber() string {
 	position := l.position
 	for isDigit(l.ch) {
 		l.readChar()
@@ -43,7 +43,7 @@ func (l *lexer) readNumber() string {
 	return l.input[position:l.position]
 }
 
-func (l *lexer) peekChar() byte {
+func (l *Lexer) peekChar() byte {
 	if l.readPosition >= len(l.input) {
 		return 0
 	} else {
@@ -51,7 +51,7 @@ func (l *lexer) peekChar() byte {
 	}
 }
 
-func (l *lexer) NextToken() token.Token {
+func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 	l.skipWhitespace()
 	switch l.ch {
@@ -117,7 +117,7 @@ func (l *lexer) NextToken() token.Token {
 	return tok
 }
 
-func (l *lexer) skipWhitespace() {
+func (l *Lexer) skipWhitespace() {
 	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
 		l.readChar()
 	}
