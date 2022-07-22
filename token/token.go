@@ -4,7 +4,7 @@ type TokenType string
 
 type Token struct {
 	Type    TokenType
-	Literal string
+	Literal string // 字面量
 }
 
 const (
@@ -57,6 +57,7 @@ var keywords = map[string]TokenType{
 	"return": RETURN,
 }
 
+// LookupIdent 查找标识符
 func LookupIdent(ident string) TokenType {
 	if tok, ok := keywords[ident]; ok {
 		return tok

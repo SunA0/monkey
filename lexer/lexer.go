@@ -2,6 +2,7 @@ package lexer
 
 import "monkey/token"
 
+// Lexer 词法分析器
 type Lexer struct {
 	input        string
 	position     int  // 当前字符串的位置
@@ -11,7 +12,7 @@ type Lexer struct {
 
 func NewLexer(input string) *Lexer {
 	l := &Lexer{input: input}
-	l.readChar()
+	l.readChar() // init position
 	return l
 }
 
@@ -27,6 +28,7 @@ func (l *Lexer) readChar() {
 	l.readPosition += 1
 }
 
+// readIdentifier
 func (l *Lexer) readIdentifier() string {
 	position := l.position
 	for isLetter(l.ch) {

@@ -5,6 +5,7 @@ import (
 	"monkey/token"
 )
 
+// Parser 语法分析器
 type Parser struct {
 	l *lexer.Lexer
 
@@ -14,6 +15,7 @@ type Parser struct {
 
 func NewParser(l *lexer.Lexer) *Parser {
 	p := &Parser{l: l}
+	// init curToken and peekToken
 	p.NextToken()
 	p.NextToken()
 
