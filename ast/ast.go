@@ -38,10 +38,6 @@ type LetStatement struct {
 	Value Expression
 }
 
-//func (ls *LetStatement) StatementNode() {
-//	panic("implement me")
-//}
-
 func (ls *LetStatement) StatementNode() {}
 func (ls *LetStatement) TokenLiteral() string {
 	return ls.Token.Literal
