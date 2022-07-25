@@ -5,7 +5,7 @@ import (
 )
 
 type Node interface {
-	TokenLiteral() string
+	TokenLiteral() string // 返回词法单元的字面量
 }
 
 type Statement interface {
@@ -30,13 +30,19 @@ func (p *Program) TokenLiteral() string {
 	}
 }
 
+var _ Statement = new(LetStatement)
+
 type LetStatement struct {
 	Token token.Token
 	Name  *Identifier
 	Value Expression
 }
 
-func (ls *LetStatement) statementNode() {}
+//func (ls *LetStatement) StatementNode() {
+//	panic("implement me")
+//}
+
+func (ls *LetStatement) StatementNode() {}
 func (ls *LetStatement) TokenLiteral() string {
 	return ls.Token.Literal
 }
