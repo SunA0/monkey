@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// TODO make a error test
 func TestLetStatements(t *testing.T) {
 	input := `let x  5; let y = 10; let foo = 888 33;`
 	l := lexer.NewLexer(input)
@@ -32,6 +33,19 @@ func TestLetStatements(t *testing.T) {
 			return
 		}
 	}
+}
+
+func TestReturnStatements(t *testing.T) {
+	input := `return 5;return 2;return 338 22;`
+	l := lexer.NewLexer(input)
+	p := NewParser(l)
+	program := p.ParseProgram()
+	checkParserErrors(t, p)
+	if len(program.Statements) != 3 {
+		t.Fatalf("error need 3")
+	}
+	
+	
 }
 
 func testLetStatement(t *testing.T, s ast.Statement, name string) bool {
