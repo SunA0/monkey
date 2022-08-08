@@ -30,23 +30,6 @@ func (p *Program) TokenLiteral() string {
 	}
 }
 
-var _ Statement = new(LetStatement)
-
-type LetStatement struct {
-	Token token.Token
-	Name  *Identifier
-	Value Expression
-}
-
-//func (ls *LetStatement) StatementNode() {
-//	panic("implement me")
-//}
-
-func (ls *LetStatement) StatementNode() {}
-func (ls *LetStatement) TokenLiteral() string {
-	return ls.Token.Literal
-}
-
 type Identifier struct {
 	Token token.Token
 	Value string
@@ -55,4 +38,27 @@ type Identifier struct {
 func (l *Identifier) statementNode() {}
 func (l *Identifier) TokenLiteral() string {
 	return l.Token.Literal
+}
+
+var _ Statement = new(LetStatement)
+
+type LetStatement struct {
+	Token token.Token
+	Name  *Identifier
+	Value Expression
+}
+
+func (ls *LetStatement) StatementNode() {}
+func (ls *LetStatement) TokenLiteral() string {
+	return ls.Token.Literal
+}
+
+type ReturnStatement struct {
+	Token       token.Token
+	ReturnValue Expression
+}
+
+func (ls *ReturnStatement) StatementNode() {}
+func (ls *ReturnStatement) TokenLiteral() string {
+	return ls.Token.Literal
 }
