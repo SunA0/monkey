@@ -34,6 +34,7 @@ func (p *Parser) NextToken() {
 	p.peekToken = p.l.NextToken()
 }
 
+// ParseProgram 解析AST根节点
 func (p *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
 	program.Statements = []ast.Statement{}
@@ -48,6 +49,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 	return program
 }
 
+// ParseStatement 解析语句
 func (p *Parser) ParseStatement() ast.Statement {
 	switch p.curToken.Type {
 	case token.LET:

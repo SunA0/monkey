@@ -44,8 +44,6 @@ func TestReturnStatements(t *testing.T) {
 	if len(program.Statements) != 3 {
 		t.Fatalf("error need 3")
 	}
-	
-	
 }
 
 func testLetStatement(t *testing.T, s ast.Statement, name string) bool {
