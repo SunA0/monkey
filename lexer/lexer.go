@@ -1,6 +1,6 @@
 package lexer
 
-import "monkey/token"
+import "github.com/SunA0/monkey/token"
 
 // Lexer 词法分析器
 type Lexer struct {

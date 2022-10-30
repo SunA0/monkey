@@ -2,7 +2,7 @@ package ast
 
 import (
 	"bytes"
-	"monkey/token"
+	"github.com/SunA0/monkey/token"
 )
 
 type Node interface {
@@ -80,7 +80,6 @@ func (ls *LetStatement) String() string {
 	}
 	return out.String()
 }
-
 func (ls *LetStatement) StatementNode() {}
 func (ls *LetStatement) TokenLiteral() string {
 	return ls.Token.Literal

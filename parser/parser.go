@@ -2,9 +2,9 @@ package parser
 
 import (
 	"fmt"
-	"monkey/ast"
-	"monkey/lexer"
-	"monkey/token"
+	"github.com/SunA0/monkey/ast"
+	"github.com/SunA0/monkey/lexer"
+	"github.com/SunA0/monkey/token"
 )
 
 // Parser 语法分析器
@@ -15,6 +15,9 @@ type Parser struct {
 	peekToken token.Token
 
 	error []string
+
+	prefixParseFns map[token.TokenType]prefixParseFn
+	infixParseFns map[token.TokenType]infixParseFn
 }
 
 func NewParser(l *lexer.Lexer) *Parser {
@@ -117,3 +120,14 @@ func (p *Parser) peekError(t token.TokenType) {
 	msg := fmt.Sprintf("expected next token to be %s ,got %s instead", t, p.peekToken.Type)
 	p.error = append(p.error, msg)
 }
+
+//
+func (p *Parser) registerPrefix(tokenType token.TokenType,fn prefixParseFn){
+	p.prefixParseFns[tokenType] = fn
+}
+
+func (p *Parser) registerInfix(tokenType token.TokenType,fn infixParseFn){
+	p.infixParseFns[tokenType] = fn
+}
+
+
