@@ -3,9 +3,9 @@ package repl
 import (
 	"bufio"
 	"fmt"
-	"io"
 	"github.com/SunA0/monkey/lexer"
 	"github.com/SunA0/monkey/token"
+	"io"
 )
 
 const PROMPT = ">>"
@@ -26,15 +26,13 @@ func Start(in io.Reader, out io.Writer) {
 	}
 }
 
-func Common(in io.Reader, out io.Writer) {
-	scanner := bufio.NewScanner(in)
-	scanned := scanner.Scan()
-	if !scanned {
-		return
-	}
-	line := scanner.Text()
-	l := lexer.NewLexer(line)
+func Common(in string) (res string) {
+
+	l := lexer.NewLexer(in)
 	for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
-		fmt.Fprintf(out, "%+v\n", tok)
+
+		res = fmt.Sprintf("%s \n %s", res, tok)
+
 	}
+	return res
 }
